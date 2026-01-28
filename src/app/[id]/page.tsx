@@ -27,13 +27,22 @@ export default async function PastePage({
                     <h1 className="text-xl font-bold text-neutral-200">Paste: {id}</h1>
                 </div>
 
-                <div className="bg-neutral-800/50 backdrop-blur-sm shadow-xl rounded-2xl border border-neutral-700/50 p-6 sm:p-10 overflow-hidden">
 
-                    {paste.viewLimit && (
-                        <div className="mb-4 inline-block px-3 py-1 bg-yellow-500/10 border border-yellow-500/20 rounded-full text-xs text-yellow-500">
-                            View Limit: {paste.viewLimit} (Current Views: {paste.views})
+
+                {paste.viewLimit && (
+                    <div className="flex flex-col items-center justify-center p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl space-y-1">
+                        <span className="text-yellow-500 font-semibold text-lg tracking-wide">
+                            ⚠️ View Limit Active
+                        </span>
+                        <div className="text-sm text-neutral-400">
+                            Limit: <span className="font-mono text-white">{paste.viewLimit}</span>
+                            <span className="mx-6">•</span>
+                            Current Views: <span className="font-mono text-white font-bold">{paste.views}</span>
                         </div>
-                    )}
+                    </div>
+                )}
+
+                <div className="bg-neutral-800/50 backdrop-blur-sm shadow-xl rounded-2xl border border-neutral-700/50 p-6 sm:p-10 overflow-hidden">
 
                     <pre className="w-full overflow-x-auto text-sm sm:text-base font-mono text-neutral-300 whitespace-pre-wrap break-words">
                         {paste.content}
