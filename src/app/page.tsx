@@ -10,6 +10,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [createdUrl, setCreatedUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -142,10 +143,14 @@ export default function Home() {
               <div className="bg-neutral-900 rounded-lg p-4 flex items-center justify-between border border-neutral-700">
                 <code className="text-purple-400 text-sm truncate">{createdUrl}</code>
                 <button
-                  onClick={() => navigator.clipboard.writeText(createdUrl)}
-                  className="ml-4 text-xs bg-neutral-800 hover:bg-neutral-700 text-white px-3 py-1.5 rounded-md transition-colors"
+                  onClick={() => {
+                    navigator.clipboard.writeText(createdUrl);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                  }}
+                  className="ml-4 text-xs bg-neutral-800 hover:bg-neutral-700 text-white px-3 py-1.5 rounded-md transition-colors min-w-[60px]"
                 >
-                  Copy
+                  {copied ? 'Copied!' : 'Copy'}
                 </button>
               </div>
 
